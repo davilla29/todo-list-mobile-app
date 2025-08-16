@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text } from "react-native";
-import styles from "../styles/globalStyles";
+import { ThemeContext } from "../ThemeContext";
+import globalStyles from "../styles/globalStyles";
 
 const StatsBar = ({ total, completed, remaining }) => {
+  const { isDark } = useContext(ThemeContext);
+  const styles = globalStyles(isDark);
+
   return (
     <View style={styles.statsContainer}>
       <View style={styles.statItem}>

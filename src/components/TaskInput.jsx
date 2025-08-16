@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, TextInput, TouchableOpacity, Text } from "react-native";
-import styles from "../styles/globalStyles";
+import { ThemeContext } from "../ThemeContext"; // import your theme context
+import globalStyles from "../styles/globalStyles";
 
 const TaskInput = ({ onAdd }) => {
+  const { isDark } = useContext(ThemeContext); // get dark mode value
+  const styles = globalStyles(isDark); // call the function with isDark
+
   const [taskText, setTaskText] = useState("");
 
   const handleAdd = () => {
@@ -15,6 +19,7 @@ const TaskInput = ({ onAdd }) => {
       <TextInput
         style={styles.input}
         placeholder="Add a new task..."
+        placeholderTextColor={isDark ? "#ccc" : "#999"} // optional
         value={taskText}
         onChangeText={setTaskText}
         onSubmitEditing={handleAdd}
